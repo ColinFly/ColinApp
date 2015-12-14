@@ -1,0 +1,34 @@
+
+关于多线程的例子
+1.线程的创建和启动方法
+2.线程常用的方法
+3.如何正确的停止线程
+
+
+1)线程的创建
+    Thread();
+    Thread(String name);
+    Thread(Runnable target);
+    Thread(Runnable target,String name)
+
+2)线程的方法
+    start();
+    sleep();
+    join();  使其他线程等待当前线程终止,
+    join(long millis) 其他线程的最长等待时间
+    static yield() 当前进程释放处理器资源并重新竞争
+    static Thread currentThread() 返回当前运行线程的引用
+
+
+    应用场景：
+    模拟战争的实现
+    线程1:国军
+    线程2：农民军
+    线程3：历史舞台--融合元素
+    线程4：英雄人物
+
+3)正确的终止线程
+ 不要用stop()
+ 不要用interrupt()
+
+ 用一个标志位来控制线程终止
