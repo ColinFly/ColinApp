@@ -1,4 +1,4 @@
-package com.example.colin.Constant;
+package com.example.colin.constant;
 
 /**
  * Created by colin on 15-12-23.

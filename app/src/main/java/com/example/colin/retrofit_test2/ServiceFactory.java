@@ -1,7 +1,6 @@
 package com.example.colin.retrofit_test2;
 
-import com.example.colin.Constant.Urls;
-import com.example.colin.Utils.LogUtil;
+import com.example.colin.constant.Urls;
 import com.example.colin.Utils.SysInfoUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -35,31 +34,6 @@ import retrofit.RxJavaCallAdapterFactory;
  * Created by colin on 15-12-18.
  */
 public class ServiceFactory {
-    /**
-     * @param clazz   对应的请求接口类
-     * @param baseUrl 共同部分的url
-     * @param <T>
-     * @return
-     */
-    public static <T> T createRetrofitService(final Class<T> clazz, final String baseUrl) {
-        final Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(new OkHttpClient())
-                .build();
-        return retrofit.create(clazz);
-    }
-
-    public static <T> T createRetrofitService1(final Class<T> clazz, final String baseUrl) {
-        final Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .client(new OkHttpClient())
-                .build();
-        return retrofit.create(clazz);
-    }
-
     /**
      * @return 解决Https不能访问的问题
      */
@@ -127,8 +101,8 @@ public class ServiceFactory {
         }
     }
 
-//最复杂的post请求部分
-    public static <T> T createRetrofitService2(final Class<T> clazz) {
+//适应post与get请求
+    public static <T> T createRetrofitService(final Class<T> clazz) {
         //创建okhHttp客户端
         OkHttpClient httpClient = getUnsafeOkHttpClient();
         //创建网络插值器加入头部信息
@@ -136,9 +110,8 @@ public class ServiceFactory {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request().newBuilder().
-                        addHeader("User-Agent", SysInfoUtil.getUserAgent(AppContext.getAppContext(), AppContext.getAppId()))
+                        addHeader("User-Agent", SysInfoUtil.getUserAgent(AppContext.getContext(), AppContext.getAppId()))
                         .build();
-
                 return chain.proceed(request);
             }
         });

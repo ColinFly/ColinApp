@@ -1,4 +1,4 @@
-package com.example.colin.retrofit_test2;
+package com.example.colin.model;
 
 
 import java.io.Serializable;
