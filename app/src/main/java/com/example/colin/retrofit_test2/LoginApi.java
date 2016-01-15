@@ -18,7 +18,7 @@ public class LoginApi {
         params.put("password", SecurityUtils.encrypt4login(pwd, AppContext.getAppSecret()));
 
         LoginBiz loginBiz=new LoginBiz();
-        new BaseNetwork.Builder().setSign(true).setUrl(Urls.Login.LOGIN).setParams(params).setBiz(loginBiz)
+        new BaseNetwork.Builder().setSign(true).setUrl(Urls.Login.LOGIN).setParams(params).setBiz(new LoginBiz())
                 .build().commit();
         loginBiz.login();
     }

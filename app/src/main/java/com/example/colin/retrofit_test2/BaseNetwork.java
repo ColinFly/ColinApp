@@ -3,6 +3,7 @@ package com.example.colin.retrofit_test2;
 
 import com.example.colin.Utils.LogUtil;
 import com.example.colin.Utils.MD5;
+import com.example.colin.constant.Params;
 import com.example.colin.constant.Urls;
 
 import java.util.TreeMap;
@@ -65,15 +66,15 @@ public class BaseNetwork {
 
     protected void completeParams() {
         //这是请求都需要的,不需要参与判断
-        params.put("appId", AppContext.getAppId());
-        params.put("timestamp", String.valueOf(System.currentTimeMillis()));
+        params.put(Params.AppSecret.APP_ID, AppContext.getAppId());
+        params.put(Params.TIMESTAMP, String.valueOf(System.currentTimeMillis()));
         //是否需要签名
         if (sign) {
-            params.put("sign", params2sign(params));
+            params.put(Params.AppSecret.SIGN, params2sign(params));
         }
         //是否需要token
         if (accessToken) {
-            params.put("accessToken", AppContext.getInstance().getAuthModel().getAccessToken());
+            params.put(Params.Token.ACCESS_TOKEN, AppContext.getInstance().getAuthModel().getAccessToken());
         }
     }
     //这里的HetApi也可以抽出去
@@ -81,8 +82,10 @@ public class BaseNetwork {
     //关注业务
     public void commit() {
         completeParams();
+        //建立链接,东西给出去
         baseBiz.handle(hetApi, params);
-
+        //最后再调
+//        execute();
 
     }
 

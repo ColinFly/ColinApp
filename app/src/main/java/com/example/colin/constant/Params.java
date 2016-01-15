@@ -15,4 +15,7 @@ public class Params {
         public final static String ACCESS_TOKEN = "accessToken";
         public final static String REFRESH_TOKEN = "refreshToken";
     }
+
+
+    public static final String TIMESTAMP = "timestamp";
 }
