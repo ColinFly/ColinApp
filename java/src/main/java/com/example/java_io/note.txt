@@ -3,3 +3,22 @@
 3.RandomAccessFile使用
 4.字符流的使用
 5.字节流的使用
+6.对象的序列化和反序列化
+
+
+java.io.File类用于表示文件(目录)
+File类只用于表示文件(目录)的信息(名称或者大小),不能用于文件内容的访问
+
+RandomAccessFile提供对文件内容的访问（可读/可写/任一位置的访问）
+    1)java文件模型
+        以byte byte 存储在硬盘上
+    2）打开文件
+        两种模式："rw"读写，"r"只读
+        RandomAccessFile raf=new RandomAccessFile(file,"rw")
+        文件指针：打开文件时指针在开头 pointer=0
+
+    3)写方法
+        raf.write(int)-->一次写一个字节(后8位),同时指针指向像一个位置，准备再次写入
+    4)读方法
+        int b=raf.read()-->读一个字节
+    5)文件操作完毕一定要关闭
