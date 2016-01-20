@@ -26,15 +26,12 @@ public class RafDemo {
         raf.write('B');
         System.out.println(raf.getFilePointer());
 
-        int i = 0x7fffffff;//int最大整数
-        System.out.println(i);
-        int i2 = 0b01111111111111111111111111111111;
-        System.out.println(i2);
-        //byte取值范围 -128~127
-//        1、byte为一字节8位，最高位是符号位，即最大值是01111111，因正数的补码是其本身，即此正数为01111111
-//                十进制表示形式为127
-//        2、最大正数是01111111，那么最小负是10000000(最大的负数是11111111，即-1)
-        byte byte1 = (byte) 11111111;
-        System.out.println(byte1);
+        int i = 0x7fffffff;
+        //用write方法一次写一个字节
+        raf.write(i >>> 24);//先写高8位
+        raf.write(i >>> 16);
+        raf.write(i >>> 8);
+        raf.write(i);//依次写入
+        System.out.println(raf.getFilePointer());
     }
 }
